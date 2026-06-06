@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    background-color: #0f0e0d;
+    color: #f5f0e8;
+    font-family: Georgia, serif;
+  }
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #1a1814;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #3d3830;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #e05c1b;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-torch text-white px-4 py-2 rounded-lg font-semibold
+           hover:bg-torch-dark transition-colors duration-200
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-secondary {
+    @apply bg-dark-card border border-dark-border text-tribal-200 px-4 py-2 rounded-lg
+           hover:border-tribal-500 hover:text-tribal-300 transition-colors duration-200
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-danger {
+    @apply bg-red-800 text-white px-4 py-2 rounded-lg font-semibold
+           hover:bg-red-700 transition-colors duration-200
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .card {
+    @apply bg-dark-card border border-dark-border rounded-xl p-5;
+  }
+  .input {
+    @apply bg-dark border border-dark-border text-tribal-100 rounded-lg px-4 py-2 w-full
+           focus:outline-none focus:border-tribal-500 transition-colors
+           placeholder:text-dark-muted;
+  }
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  .badge-active   { @apply badge bg-jungle-900 text-jungle-300; }
+  .badge-captain  { @apply badge bg-tribal-900 text-tribal-300; }
+  .badge-immune   { @apply badge bg-blue-900 text-blue-300; }
+  .badge-eliminated { @apply badge bg-red-900 text-red-300; }
+  .badge-pending  { @apply badge bg-dark-muted text-tribal-400; }
+  .badge-open     { @apply badge bg-jungle-900 text-jungle-300 animate-pulse; }
+  .badge-closed   { @apply badge bg-dark-muted text-tribal-500; }
+}

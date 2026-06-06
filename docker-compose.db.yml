@@ -1,0 +1,22 @@
+# Run just the database for local development:
+#   docker compose -f docker-compose.db.yml up -d
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: survivor_user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: survivor_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - survivor_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U survivor_user -d survivor_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  survivor_postgres_data: 
