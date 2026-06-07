@@ -1,5 +1,8 @@
+# Database only (for running backend/frontend natively):
+#   docker compose up -d
+#
 # Full stack (DB + backend + frontend):
-#   docker compose up --build
+#   docker compose --profile full up --build
 
 services:
   db:
@@ -19,6 +22,7 @@ services:
       retries: 5
 
   backend:
+    profiles: ["full"]
     build: ./backend
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
     environment:
@@ -34,6 +38,7 @@ services:
       - ./backend:/app
 
   frontend:
+    profiles: ["full"]
     build: ./frontend
     environment:
       NEXT_PUBLIC_API_URL: http://localhost:8000
