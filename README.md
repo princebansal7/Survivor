@@ -10,6 +10,14 @@ A real-time Survivor-style game web app. Players compete in rounds, vote to elim
 
 ### Option A — Full Stack in Docker (recommended)
 
+Before running, create your Docker env file:
+
+```bash
+cp backend/.env.docker backend/.env
+# Edit backend/.env and set your own SECRET_KEY for production
+```
+
+Then start:
 ```bash
 docker compose --profile full up --build
 
@@ -17,7 +25,7 @@ docker compose --profile full up --build
 docker compose --profile full down
 ```
 
-- Database: `postgres://survivor_user:password@localhost:5432/survivor_db`
+- Database: `postgres://survivor_user:password@db:5432/survivor_db` (internal Docker hostname)
 - Backend API: http://localhost:8000
 - Frontend: http://localhost:3000
 - API docs: http://localhost:8000/docs
@@ -76,6 +84,12 @@ status=UserStatus.approved if is_first_user else UserStatus.pending,
 3. You are immediately logged in as admin
 4. Subsequent users must be approved via the Admin panel
 
+
+## Security
+
+- Never commit `.env`, `.env.local`, or `.env.docker` files — they are already in `.gitignore`
+- For production: set `SECRET_KEY` to a random 32+ character string
+- For production: set a strong `DATABASE_URL` password, not the default `password`
 
 ## Tech Stack
 
