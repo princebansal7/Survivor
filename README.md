@@ -10,11 +10,11 @@ A real-time Survivor-style game web app. Players compete in rounds, vote to elim
 
 ### Option A — Full Stack in Docker (recommended)
 
-Before running, create your Docker env file:
+Before running, set up your env file:
 
 ```bash
-cp backend/.env.docker backend/.env
-# Edit backend/.env and set your own SECRET_KEY for production
+cp backend/.env.example backend/.env
+# Edit backend/.env — set SECRET_KEY and change DATABASE_URL host to "db" for Docker:
 ```
 
 Then start:
@@ -25,7 +25,7 @@ docker compose --profile full up --build
 docker compose --profile full down
 ```
 
-- Database: `postgres://survivor_user:password@db:5432/survivor_db` (internal Docker hostname)
+- Database: set via `DATABASE_URL` in `backend/.env` (change `localhost` → `db` when using Docker)
 - Backend API: http://localhost:8000
 - Frontend: http://localhost:3000
 - API docs: http://localhost:8000/docs
@@ -47,8 +47,6 @@ python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 cp .env.example .env
-# Edit .env — set DATABASE_URL if needed:
-# postgresql://survivor_user:password@localhost:5432/survivor_db
 uvicorn app.main:app --reload
 
 # 3. Set up the frontend (in a new terminal)
@@ -87,9 +85,9 @@ status=UserStatus.approved if is_first_user else UserStatus.pending,
 
 ## Security
 
-- Never commit `.env`, `.env.local`, or `.env.docker` files — they are already in `.gitignore`
+- Never commit `.env` or `.env.local` files — they are already in `.gitignore`
 - For production: set `SECRET_KEY` to a random 32+ character string
-- For production: set a strong `DATABASE_URL` password, not the default `password`
+- For production: set a strong `DATABASE_URL` password (the default in `.env.example` is just a placeholder)
 
 ## Tech Stack
 

@@ -3,7 +3,6 @@
 .env.local
 .env.*.local
 backend/.env
-backend/.env.docker
 frontend/.env.local
 frontend/.env
 
