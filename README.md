@@ -63,13 +63,6 @@ npm run dev
 
 The **first person to register** on a fresh database becomes the admin automatically.
 
-```python
-# backend/app/routers/auth.py — lines 19, 24–25
-is_first_user = db.query(User).count() == 0
-role=UserRole.admin if is_first_user else UserRole.player,
-status=UserStatus.approved if is_first_user else UserStatus.pending,
-```
-
 | User # | Role   | Status    | Notes                                      |
 |--------|--------|-----------|--------------------------------------------|
 | 1st    | admin  | approved  | Full access — no approval needed           |
